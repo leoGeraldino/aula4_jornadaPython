@@ -8,6 +8,21 @@ def main(page):         #The page is defined in main function
     chat = ft.Column()      #All the messages sent to chat will appear in a column
     username = ft.TextField(label='Seu nome aqui...')  #With this textField we store the username   
 
+    def tunnelMessage(message):
+        type = message['type']
+        if type == 'message':
+            messageContent = message['text']
+            messageUser = message['user']
+            chat.controls.append(ft.Text(f'{messageUser}:{messageContent}'))
+        else:
+            messageUser = message['user']
+            chat.controls.append(ft.Text(f'{messageUser} entrou no chat', size=12, italic=True, 
+                                         color=ft.colors.ORANGE_500))
+        page.update()
+    
+    page.pubsub.subscribe(tunnelMessage)
+    
+
     def sendMessage(event):         #the sendMessage function will catch values for messageField and username
                                     #to send messages to all the users logged
         page.pubsub.send_all({'text': messageField.value, 'user': username.value, 'type': 'message'})
@@ -47,4 +62,5 @@ def main(page):         #The page is defined in main function
     page.add(text)      #All the elements need to be added to the page (text and loginButton, for example)
     page.add(loginButton) 
 
-ft.app(target=main, view=ft.WEB_BROWSER, port=5000) #App configurations
+ft.app(target=main, view=ft.WEB_BROWSER, port=5000) #App configurations.If view = ft.FLET_APP, a 
+#native Flet window will open 
