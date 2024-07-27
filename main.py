@@ -8,11 +8,11 @@ def main(page):         #The page is defined in main function
     chat = ft.Column()      #All the messages sent to chat will appear in a column
     username = ft.TextField(label='Seu nome aqui...')  #With this textField we store the username   
 
-    def tunnelMessage(message):
-        type = message['type']
-        if type == 'message':
-            messageContent = message['text']
-            messageUser = message['user']
+    def tunnelMessage(message):         #This function will put the message in the tunnel for everyone 
+        type = message['type']          #in the chat
+        if type == 'message':                       #If some message is in the tunnel, its content and 
+            messageContent = message['text']        #user will appear on the screen, else the user
+            messageUser = message['user']           #logged will be displayed 
             chat.controls.append(ft.Text(f'{messageUser}:{messageContent}'))
         else:
             messageUser = message['user']
