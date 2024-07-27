@@ -1,5 +1,4 @@
-'''The purpose of this project is to create a live chat with Flet, a Python web framework. One Flask
-version will be made too.'''
+'''The purpose of this project is to create a live chat with Flet, a Python web framework.'''
 
 import flet as ft       #First, we import flet and call it as ft
 
